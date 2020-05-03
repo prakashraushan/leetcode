@@ -1,0 +1,49 @@
+class Solution {
+    public boolean isHappy(int n) {
+        
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        
+        int s = sum(n);
+        // System.out.println("main method s is " + s);   
+        while( s!=1){
+            
+             if(!hm.containsKey(s)){
+                 hm.put(s,s);
+                }else{
+                    return false;
+                }
+            s = sum(s);
+            // System.out.println("while method s is " + s);   
+        }
+        
+        if(s==1){
+            return true;
+        }
+        return false;
+    }
+    
+    int sum(int number){
+
+     
+        int sum = 0;
+        
+        while(number>9){
+            
+            int remainder = number%10;
+            number = number/10;
+            sum+=(int) Math.pow(remainder, 2);
+            // System.out.println("remainder" + remainder);
+            // System.out.println("newNumber" + number);   
+            // System.out.println("sum " + sum);       
+        }
+        sum += (int) Math.pow(number, 2);
+        
+       
+       
+        
+
+        // System.out.println("sum " + sum);       
+
+         return sum;
+    }
+}
