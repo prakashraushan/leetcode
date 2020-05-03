@@ -1,0 +1,20 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+       
+        int[] charArray = new int[26];
+        
+        for(char c: magazine.toCharArray()){
+            charArray[c-'a']++;
+        }
+        
+        for(char c: ransomNote.toCharArray()){
+            if(charArray[c-'a']==0){
+                return false;
+            }else{
+                charArray[c-'a']--;
+            }
+        }
+        
+     return true;   
+    }
+}
