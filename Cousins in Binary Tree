@@ -1,0 +1,51 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int xDepth=-1, yDepth=-1;
+    TreeNode xParent = null, yParent =null;
+    public boolean isCousins(TreeNode root, int x, int y) {
+        
+        depth(root,null,0,x,y);
+        
+        
+        
+        return (xDepth==yDepth) && (xParent!=yParent);
+    }
+   
+    public void depth(TreeNode root, TreeNode parent, int depth, int x, int y){
+        if(root == null){
+            return;
+        }
+        if(x==root.val){
+            xDepth = depth;
+            xParent = parent;
+        } 
+        
+        if(y==root.val){
+            yDepth = depth;
+            yParent = parent;
+        }
+        
+        if( xDepth!=-1 && yDepth!=-1){
+            return;
+        }
+        
+        depth(root.left, root, depth+1, x,y);
+        depth(root.right, root, depth+1, x,y);
+        
+       
+    }
+}
