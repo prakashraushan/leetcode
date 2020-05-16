@@ -1,0 +1,46 @@
+class Solution {
+    public int maxSubarraySumCircular(int[] A) {
+        /** find max
+            find min
+            find total
+            find total - min
+            if max <0, then find the maxelement in array and that would be max
+            else
+            returnmax of (max, total-min)**/
+        
+        int totalMax = Integer.MIN_VALUE;
+        int currentMax = 0;
+        
+        int total=0;
+        
+        int totalMin = Integer.MAX_VALUE;
+        int currentMin = 0;
+        
+        int maxNumber = A[0];
+        
+        for(int i=0;i<A.length;i++){
+           
+            currentMax = Math.max(A[i],currentMax+A[i]);
+            totalMax = Math.max(totalMax,currentMax);
+            total+=A[i];
+            
+            
+            currentMin =Math.min(A[i],currentMin+A[i]);
+            totalMin = Math.min(totalMin,currentMin);
+            
+            if(A[i]>maxNumber){
+                maxNumber = A[i];
+            }
+            
+             // System.out.println("i = " + i +"A[i] = " + A[i]+ " currentMax " + currentMax +" totalMax " + totalMax);
+        }
+        
+        if(totalMax<0){
+            return maxNumber;
+        }
+        
+        
+        return Math.max(totalMax, total-totalMin);
+       
+    }
+}
