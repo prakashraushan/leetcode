@@ -1,0 +1,48 @@
+class Solution {
+   public boolean checkInclusion(String p, String s) {
+       
+    
+    
+        if (s == null || s.length() == 0 || p.length() >s.length()) return false;
+   
+        int[] result = new int[26];
+        int[] moving = new int[26];
+        for (int i=0;i<p.length();i++) {
+          
+            result[p.charAt(i)-'a']++;
+        
+            moving[s.charAt(i)-'a']++;
+        }
+        
+        if(compareUtil(result,moving)){
+           return true;
+        }
+        
+        for(int i=p.length();i<s.length();i++){
+            
+            moving[s.charAt(i-p.length())-'a']--;
+            moving[s.charAt(i)-'a']++;
+            
+            if(compareUtil(result,moving)){
+                return true;
+            }
+            
+        }
+        
+        
+
+    
+        return false;
+    }
+    
+    public boolean compareUtil(int[] result, int[] moving){
+        
+        for(int i=0;i<26;i++){
+            if(result[i]!=moving[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+       
+}
