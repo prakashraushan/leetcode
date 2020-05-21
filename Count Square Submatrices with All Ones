@@ -1,0 +1,33 @@
+class Solution {
+    public int countSquares(int[][] matrix) {
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        int result = 0;
+        int topLeft =0;
+        
+        int[] temp = new int[n];
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]==1){
+
+                    int top = (i==0)?0:temp[j];
+                    int left = (j==0)?0:temp[j-1];
+                    
+                    temp[j]= 1+ Math.min(Math.min(top,left),topLeft);
+                    
+                    result+=temp[j];
+                    
+                    topLeft = (j==n-1)?0:top;
+                }else{
+                    temp[j]=0;
+                }
+            }
+        }
+        
+        return result;
+        
+    }
+}
