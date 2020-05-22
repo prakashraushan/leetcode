@@ -1,0 +1,54 @@
+class Solution {
+    class CharKeyVal implements Comparable<CharKeyVal>{
+        public Character c;
+        public Integer count;
+        
+        
+        public CharKeyVal(Character c, Integer count){
+            this.c = c;
+            this.count = count;
+        }
+        
+        public int compareTo(CharKeyVal obj){
+            return obj.count-this.count;
+        }
+        
+        
+    }
+    public String frequencySort(String s) {
+         
+        PriorityQueue<CharKeyVal> pq = new PriorityQueue<CharKeyVal>(); 
+        
+        HashMap<Character, Integer> hm= new HashMap();
+        
+        
+        for(int i=0;i<s.length();i++){
+            
+            hm.put(s.charAt(i),hm.getOrDefault(s.charAt(i),0)+1);
+        }
+        
+     
+        
+      
+        for(Character c: hm.keySet()){
+             
+            
+            CharKeyVal temp = new CharKeyVal(c,hm.get(c));
+            pq.add(temp);
+            
+        }
+        
+         
+        StringBuilder bd = new StringBuilder();
+        while(!pq.isEmpty()){
+            CharKeyVal charKeyVal = pq.poll();
+            for(int i=0;i<charKeyVal.count;i++){
+    
+                bd.append(charKeyVal.c);
+            }
+        }
+
+        
+        return bd.toString();
+    }
+}
