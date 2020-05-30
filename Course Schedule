@@ -1,0 +1,38 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // Adjacency list declare and populate
+        // Take visited array 
+        // Call DFS
+        
+        ArrayList<Integer>[] adj = new ArrayList[numCourses];
+        
+        for(int i=0;i<numCourses;i++){
+            adj[i] = new ArrayList();
+        }
+        
+        for(int[] i: prerequisites){
+            adj[i[0]].add(i[1]);
+        }
+        
+        int[] visited= new int[numCourses];
+         
+        for(int i=0;i<numCourses;i++){
+            if(visited[i]==0 && !dfs(adj,visited,i)) return false;
+           
+        }
+       return true;
+    }
+    
+    public boolean dfs(ArrayList<Integer>[] adj, int[] visited, int v){
+
+        if(visited[v]==1) return false;
+        visited[v]  =1;
+        
+        for(int i=0;i<adj[v].size();i++){
+            if(!dfs(adj,visited,adj[v].get(i))) return false;
+        }
+          
+        visited[v]  =2;
+        return true;
+    }
+}
