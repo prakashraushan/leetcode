@@ -1,0 +1,61 @@
+class Solution {
+    
+    public class ClosePoint implements Comparable<ClosePoint>{
+        public int dist;
+        public int[] point;
+        
+        public ClosePoint(int d, int[] p){
+            this.dist = d;
+            this.point = p;
+        }
+        
+        @Override
+        public int compareTo(ClosePoint e){
+           
+            return this.dist-e.dist;
+            
+        }
+    }
+    
+    public int[][] kClosest(int[][] points, int K) {
+        int[][] result = new int[K][2];
+        
+        PriorityQueue<ClosePoint> pq = new PriorityQueue();
+        for(int[] point :points){
+           
+            
+            int dist = distance(point);
+            
+            pq.add(new ClosePoint(dist,point));
+        }
+        
+//          while (!pq.isEmpty() && K!=-1) {
+            
+             
+//         }
+        
+        K =K-1;
+        do{
+            ClosePoint pt = pq.poll();
+            // System.out.println("pt distance " + pt.dist + " pt first point " + pt.point[0] + " " +pt.point[1]);
+             
+             result[K--] = pt.point;
+        }while ( K!=-1 && !pq.isEmpty() ) ;
+        
+        
+        
+        return result;
+    }
+    
+    
+    
+    
+    public int distance(int[] point){
+         // System.out.println(point[0] + " " + point[1]);
+        // double distanceSqr = Math.sqrt((point[0] * point[0]) + (point[1] * point[1]));
+        int distance = (point[0] * point[0]) + (point[1] * point[1]);
+         // System.out.println(distance);
+        return distance;
+        
+    }
+}
